@@ -8,5 +8,3 @@ Inspired by the following projects:
 - Fork of above Python lib with frequency-setting helper [function](https://github.com/jpalczewski/RasPi-Si5351-cli/commit/df99c7692c85fdd14e19660bb4d4d05d95dd708c)
 - Independent Arduino library with very detailed instructions: https://github.com/etherkit/Si5351Arduino
 - Independent Python library: https://github.com/M0WUT/Python_Si5351/blob/master/Si5351_wut.py
-
-
