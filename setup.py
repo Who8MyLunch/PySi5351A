@@ -6,7 +6,7 @@ import setuptools
 
 version = '2017.12.27'
 
-dependencies = ['smbus']
+dependencies = ['smbus2']
 
 
 setuptools.setup(install_requires=dependencies,
