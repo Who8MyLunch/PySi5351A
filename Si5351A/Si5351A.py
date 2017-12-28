@@ -37,7 +37,7 @@ class Si5351(object):
     def write_byte(self, register, value):
         """Write a byte to designated register
         """
-        self._smbus.write_byte_data(self._address, register, value):
+        self._smbus.write_byte_data(self._address, register, value)
 
     def read_byte(self, register):
         """Read single byte from designated register
