@@ -1,5 +1,6 @@
 
-import smbus
+import smbus2
+import numpy as np
 
 from . import constants
 
@@ -10,7 +11,6 @@ class Si5351(object):
 
         self.crystalFreq     = constants.CRYSTAL_FREQ_25MHZ
         self.crystalLoad     = constants.CRYSTAL_LOAD_10PF
-        self.crystalPPM      = 25
         self.pllA_freq       = 0
         self.pllB_freq       = 0
 
@@ -43,6 +43,33 @@ class Si5351(object):
         """Read single byte from designated register
         """
         return self._smbus.read_byte_data(self._address, register)
+
+    def set_frequency(self, pll, output, freqMHz):
+        """Set the output frequency
+        """
+        synthDiv = int(np.ceil(600/freqMHz))
+        
+        if(synthDiv < 6): # Si5351 requires it to be between 6 and 1800
+            synthDiv += 6 - synthDiv
+        
+        if(synthDiv > 1800): # Si5351 requires it to be between 6 and 1800
+            raise ValueError("synthDiv > 1800, calculated as: {}".format((synthDiv)))
+
+        intFreq = freqMHz*synthDiv # intermediate PLL frequency
+        if(intFreq > 900):
+            raise ValueError("Error calculating multisynth divisor for " + str(freqMHz) + " tried " + str(synthDiv))
+        
+        pllMult = intFreq/25 # PLL multiplier as a floating point number
+        pllBase = int(pllMult) # base multiplier for the PLL
+        if((pllBase < 15) or (pllBase > 90)):
+            raise ValueError("pllBase outside of [0,90], calculated as: " + str(pllBase))
+
+        pllDenom = 1000000 # PLL multiplier denominator
+        pllNum = int(np.modf(pllMult)[0]*pllDenom) # PLL multiplier numerator
+        
+        self.setupPLL(pll, pllBase, pllNum, pllDenom)
+        self.setupMultisynth(output, pll, synthDiv)
+
 
     def setupPLL(self, pll, mult, num=0, denom=1):
 
@@ -220,7 +247,7 @@ class Si5351(object):
 if __name__ == '__main__':
     si = Si5351()
 
-    print "Set Output #0 to 13.703704 MHz"
+    print("Set Output #0 to 13.703704 MHz")
 
     # vco = 25 MHz * (24 + 2 / 3) = 616.67 MHz
     si.setupPLL(si.PLL_A, 24, 2, 3)
