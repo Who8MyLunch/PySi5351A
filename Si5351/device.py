@@ -8,7 +8,7 @@ def _bitfield_parser(MSB, LSB, width=8):
     """Generate a compiled bitfield packer/unpacker.  Uses package bitstruct.
     """
     N_lead = width - MSB - 1
-    N_data = MSB LSB + 1
+    N_data = MSB - LSB + 1
     N_trail = LSB
 
     fmt = 'p{:d}u{:d}p{:d}'.format(N_lead, N_data, N_trail)
