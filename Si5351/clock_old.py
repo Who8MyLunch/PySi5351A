@@ -111,10 +111,10 @@ class Si5351(object):
         baseaddr = 26 if pll == constants.PLL_A else 34
 
         # The datasheet is a nightmare of typos and inconsistencies here!
-        print(P3)
-        print(baseaddr,      (P3 & 0x0000FF00) >> 8)
-        print(baseaddr + 1,  (P3 & 0x000000FF))
-        print(baseaddr + 5, ((P3 & 0x000F0000) >> 12)  )
+        print(P1, P2, P3)
+#         print(baseaddr,      (P3 & 0x0000FF00) >> 8)
+#         print(baseaddr + 1,  (P3 & 0x000000FF))
+#         print(baseaddr + 5, ((P3 & 0x000F0000) >> 12)  )
 #         print(baseaddr + 5, ((P3 & 0x000F0000) >> 12) | ((P2 & 0x000F0000) >> 16) )
         
         self.write_byte(baseaddr,      (P3 & 0x0000FF00) >> 8)
