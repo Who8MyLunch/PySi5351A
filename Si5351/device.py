@@ -128,6 +128,6 @@ class Device():
                 data_reg_byte += data_prior_byte
             
             # Write byte to register address
-            print(data_reg_byte)
-#             self.write_byte(register['register'], data_reg_byte)
+#             print(data_reg_byte)
+            self.write_byte(register['register'], data_reg_byte)
             

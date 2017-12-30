@@ -1,8 +1,5 @@
 
-import ordered_namespace as ons
-
 name = 'Si5351A/B/C'
-
 address = 0x60
 
 parameters = {'SYS_INIT': [{'register': 0,
@@ -570,5 +567,3 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_MSB':   4,
                             'reg_LSB':   4}],
              }
-
-parameters = ons.Struct(parameters)

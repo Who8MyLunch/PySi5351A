@@ -2,7 +2,7 @@
 import numpy as np
 import ordered_namespace as ons
 
-from . import constants
+from . import device
 from . import registers
 
 #------------------------------------------------
@@ -25,3 +25,11 @@ def check_bits(parameters):
                 pass
 
 
+
+            
+class Clock(device.Device):
+    """Device: Si5351A/B/C
+    """
+    def __init__(self, bus):
+        
+        super().__init__(address, parameters, bus)
