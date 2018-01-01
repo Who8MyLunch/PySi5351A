@@ -47,6 +47,41 @@ class Clock(device.Device):
         
         PLLA_SRC
         PLLB_SRC
+    
+    def rational_fractions(self):
+        """See these links:
+        
+        https://docs.python.org/3.6/library/fractions.html#fractions.Fraction
+        
+        https://www.johndcook.com/blog/2010/10/20/best-rational-approximation/
+        
+        https://stackoverflow.com/questions/23344185/how-to-convert-a-decimal-number-into-fraction/23344270#23344270
+        
+        """
+        
+    def configure(self):
+        """Write all parameters to the clock device.  Workflow based on Figure 12 from Si5153 A/B/C datasheet.
+        """
+        
+        # Define clock off state at registers 24 and 25
+
+        # Disable outputs
+        # Set ; register 3 = 0xff
+        
+        # Power down all output drivers
+        # registers 16-22 = 0x80
+        
+        # Set interrupt masks with register 2
+        
+        # Write clock parameters
+        
+        # Apply PLLA and PLLB soft reset
+        # Reg 177 = 0xAC
+        
+        # Enable desired output at register 3
+        
+        
+        
         
         
         
