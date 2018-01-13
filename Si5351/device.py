@@ -8,42 +8,32 @@ def check_bits(parameters):
     for name, values in parameters.items():
         for item in values:
             if item['reg_MSB'] < 0:
-                raise ValueError('{} reg_MSB cannot be negative: {}'.format(name,
-                                                                            item['reg_MSB']))
+                raise ValueError('{} reg_MSB cannot be negative: {}'.format(name, item['reg_MSB']))
             if item['reg_LSB'] < 0:
-                raise ValueError('{} reg_LSB cannot be negative: {}'.format(name,
-                                                                            item['reg_LSB']))
+                raise ValueError('{} reg_LSB cannot be negative: {}'.format(name, item['reg_LSB']))
             if item['reg_MSB'] < item['reg_LSB']:
-                raise ValueError('{} reg_MSB cannot be less than reg_LSB: {}, {}'.format(name,
-                                                                                         item['reg_MSB'],
-                                                                                         item['reg_LSB']))
-                
+                raise ValueError('{} reg_MSB cannot be less than reg_LSB: {}, {}'.format(name, item['reg_MSB'], item['reg_LSB']))                
             d_reg = item['reg_MSB'] - item['reg_LSB']
             try:
                 d_dat = item['dat_MSB'] - item['dat_LSB']
 
                 if item['dat_MSB'] < 0:
-                    raise ValueError('{} dat_MSB cannot be negative: {}'.format(name,
-                                                                                item['dat_MSB']))
+                    raise ValueError('{} dat_MSB cannot be negative: {}'.format(name, item['dat_MSB']))
                 if item['dat_LSB'] < 0:
-                    raise ValueError('{} dat_LSB cannot be negative: {}'.format(name,
-                                                                                item['dat_LSB']))
+                    raise ValueError('{} dat_LSB cannot be negative: {}'.format(name, item['dat_LSB']))
                 if item['dat_MSB'] < item['dat_LSB']:
-                    raise ValueError('{} dat_MSB cannot be less than dat_LSB: {}, {}'.format(name,
-                                                                                             item['dat_MSB'],
-                                                                                             item['dat_LSB']))
-
+                    raise ValueError('{} dat_MSB cannot be less than dat_LSB: {}, {}'.format(name, item['dat_MSB'], item['dat_LSB']))
                 if d_dat != d_reg:
-                        raise ValueError('Bit fields are different sizes {}: {} vs {} [{}]'.format(name,
-                                                                                                   d_reg,
-                                                                                                   d_dat,
-                                                                                                   item))
+                        raise ValueError('Bit fields are different sizes {}: {} vs {} [{}]'.format(name, d_reg, d_dat, item))
 
             except KeyError:
                 pass
 
             
+            
 def number_of_bits(value):
+    """Return number of bits required to represent the provided number
+    """
     value = int(value)
     if value == 0:
         return 0
@@ -53,6 +43,8 @@ def number_of_bits(value):
 
     
 def number_of_bytes(value):
+    """Return number of bytes required to represent the provided number
+    """
     value = int(value)
     if value == 0:
         return 0
@@ -77,26 +69,32 @@ def mask(MSB, LSB):
 def pack_bits(data_bits, MSB, LSB):
     """Pack unsigned-integer data value into zero-padded bitfield
     """
+    if data_bits < 0:
+        raise ValueError('data_bits must be non-negative: {}'.format(data_bits))
+        
     if data_bits == 0:
         return 0
 
     data_shifted = data_bits << LSB
-    data_masked = data_shifted & mask(MSB, LSB)
+    data_binary = data_shifted & mask(MSB, LSB)
     
-    return data_masked
+    return data_binary
 
 
 
 def unpack_bits(data_binary, MSB, LSB):
     """Extract bits between MSB and LSB (inclusive)
     """
+    if data_binary < 0:
+        raise ValueError('data_binary must be non-negative: {}'.format(data_binary))
+        
     if data_binary == 0:
         return 0
     
     data_masked = data_binary & mask(MSB, LSB)
-    data_shifted = data_masked >> LSB
+    data_bits = data_masked >> LSB
     
-    return data_shifted
+    return data_bits
 
 
 
@@ -104,10 +102,10 @@ def unpack_bits(data_binary, MSB, LSB):
 
 
 class Device():
-    """Manage data IO with a given I32C/SMBus device
+    """Manage data IO with an I2C/SMBus device
     """
     def __init__(self, address, parameters, bus, debug=False):
-        """Instantiate device manager given device parameters
+        """Instantiate device manager
         """
         check_bits(parameters)
         
@@ -122,17 +120,24 @@ class Device():
         else:
             self._smbus = smbus2.SMBus(bus)
             self._cache = None
-            
+
     def _ingest_parameters(self, parameters):
+        """Process provided device parameters, store internally.
+        Also check for missing data MSB/LSB values (that's OK) and compute default values
+        assuming LSB = 0 and MSB is derived from required register LSB/MSB values.
+        """
         self._parameters = {}
         
+        # Loop over data parameters
         for name, values in parameters.items():
             self._parameters[name] = []
+            # Loop over device registers associated with this parameter
             for R in values:
                 register = {}
                 register.update(R)
 
                 if not 'dat_LSB' in register:
+                    # Compute default data LSB/MSB based on register storage values
                     register['dat_MSB'] = R['reg_MSB'] - R['reg_LSB']
                     register['dat_LSB'] = 0
                     
@@ -142,7 +147,7 @@ class Device():
         """Write a byte to designated register
         """
         if data_byte > 255:
-            raise ValueError('Data byte value is greater than 255: {}'.format(dat_byte))
+            raise ValueError('Data byte value may not be greater than 255: {}'.format(dat_byte))
             
         if self._debug:
             self._cache[register] = data_byte
@@ -166,10 +171,6 @@ class Device():
             
             data_intermed = unpack_bits(data_reg_byte, register['reg_MSB'], register['reg_LSB'])
 
-#             if 'dat_LSB' not in register:
-#                 register['dat_MSB'] = 7
-#                 register['dat_LSB'] = 0
-                
             data_value = pack_bits(data_intermed, register['dat_MSB'], register['dat_LSB'])
             value += data_value
 

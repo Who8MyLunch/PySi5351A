@@ -41,6 +41,7 @@ _path_module = pathlib.Path(__file__).parent.absolute()
 
 
 #------------------------------------------------
+
 class TestBits(unittest.TestCase):
     def setUp(self):
         pass
