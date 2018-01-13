@@ -188,8 +188,8 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_MSB':  1,
                             'reg_LSB':  0}],
              'CLK1_IDRV': [{'register':17,
-                            'reg_MSB':  0,
-                            'reg_LSB':  2}],
+                            'reg_MSB':  1,
+                            'reg_LSB':  0}],
              'CLK2_IDRV': [{'register':18,
                             'reg_MSB':  1,
                             'reg_LSB':  0}],
@@ -236,7 +236,6 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  0}],
 
 # PLL Dividers A & B
-
                'MSNA_P1': [{'register':28,
                             'reg_MSB':  1,
                             'reg_LSB':  0,
@@ -510,7 +509,6 @@ parameters = {'SYS_INIT': [{'register': 0,
 
 
 # Spread Spectrum, just enough control so I can disable it
-
                 'SSC_EN': [{'register':149,
                             'reg_MSB':   7,
                             'reg_LSB':   7}],
@@ -520,7 +518,6 @@ parameters = {'SYS_INIT': [{'register': 0,
 
 
 # Phase offsets
-
             'CLK0_PHOFF': [{'register':165,
                             'reg_MSB':   6,
                             'reg_LSB':   0}],
@@ -541,12 +538,10 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':   0}],
 
 
-# Miscelaneous stuff
-
+# Miscelaneous
               'PLLA_RST': [{'register':177,
                             'reg_MSB':   5,
                             'reg_LSB':   5}],
-
               'PLLB_RST': [{'register':177,
                             'reg_MSB':   7,
                             'reg_LSB':   7}],
@@ -558,11 +553,9 @@ parameters = {'SYS_INIT': [{'register': 0,
        'CLKIN_FANOUT_EN': [{'register':187,
                             'reg_MSB':   7,
                             'reg_LSB':   7}],
-
           'XO_FANOUT_EN': [{'register':187,
                             'reg_MSB':   6,
                             'reg_LSB':   6}],
-
           'MS_FANOUT_EN': [{'register':187,
                             'reg_MSB':   4,
                             'reg_LSB':   4}],
