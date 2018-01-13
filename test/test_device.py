@@ -86,8 +86,63 @@ class TestDeviceParameters(unittest.TestCase):
             tst = self.D.get_parameter(name)            
             self.assertTrue(tst == val, (name, tst, val))
 
-                    
 
+
+class TestSetGetItem(unittest.TestCase):
+    def setUp(self):
+        A = None
+        P = registers.parameters
+        B = None
+        
+        self.D = device.Device(A, P, B, debug=True)
+
+    def tearDown(self):
+        pass
+
+    def test_A(self):
+        for name, values in registers.parameters.items():
+
+            val = 1
+            self.D.set_parameter(name, val)
+
+            tst_a = self.D.get_parameter(name)            
+            tst_b = self.D[name]
+
+            self.assertTrue(tst_a == val, (name, tst_a, val))
+            self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
+        
+
+            val = 0
+            self.D.set_parameter(name, val)
+
+            tst_a = self.D.get_parameter(name)            
+            tst_b = self.D[name]
+
+            self.assertTrue(tst_a == val, (name, tst_a, val))
+            self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
+        
+    def test_B(self):
+        for name, values in registers.parameters.items():
+
+            val = 1
+            self.D[name] = val
+
+            tst_a = self.D.get_parameter(name)            
+            tst_b = self.D[name]
+
+            self.assertTrue(tst_a == val, (name, tst_a, val))
+            self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
+        
+
+            val = 0
+            self.D[name] = val
+
+            tst_a = self.D.get_parameter(name)            
+            tst_b = self.D[name]
+
+            self.assertTrue(tst_a == val, (name, tst_a, val))
+            self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
+        
 
 
 #------------------------------------------------

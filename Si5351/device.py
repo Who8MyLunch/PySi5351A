@@ -97,22 +97,32 @@ def unpack_bits(data_binary, MSB, LSB):
     return data_bits
 
 
+def check_byte_value(val):
+    if val < 0:
+        raise ValueError('Byte value may not be negative: {}'.format(val))
+        
+    if val > 255:
+        raise ValueError('Byte value may not be greater than 255: {}'.format(val))
+            
+
 
 #----------------------------------------------------------------------
 
 
 class Device():
-    """Manage data IO with an I2C/SMBus device
+    """Manage data parameters with I2C/SMBus device
     """
     def __init__(self, address, parameters, bus, debug=False):
         """Instantiate device manager
         """
-        check_bits(parameters)
-        
-        self._address = address
-        self._ingest_parameters(parameters)
         self._debug = debug
-        if debug:
+        self._address = address
+
+        check_bits(parameters)
+        self._ingest_parameters(parameters)
+        check_bits(self._parameters)
+
+        if self._debug:
             self._smbus = None
 
             N = 500  # max. number of registers
@@ -146,8 +156,7 @@ class Device():
     def write_byte(self, register, data_byte):
         """Write a byte to designated register
         """
-        if data_byte > 255:
-            raise ValueError('Data byte value may not be greater than 255: {}'.format(dat_byte))
+        check_byte_value(data_byte)
             
         if self._debug:
             self._cache[register] = data_byte
