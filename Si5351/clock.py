@@ -8,25 +8,50 @@ from . import registers_Si5351
 
             
 class Clock(device.Device):
-    """Device: Si5351A/B/C
+    """Device: Si5351 ABC
     """
     def __init__(self, bus):
         """Instantiate device with register data for Si5351 clock generator
         """
         super().__init__(registers_Si5351.address, registers_Si5351.parameters, bus)
         
-    def status(self):
-        """Return device status information
+    def status_SYS(self):
+        """Return device system status information
         """
-        SYS_INIT
-        LOS for CLKIN
-        LOL for PLL_A and PLL_B
+        names = ['SYS_INIT', 'CLKIN_DIV', 'XTAL_CL', 'SSC_EN', 'CLKIN_FANOUT_EN', 'XO_FANOUT_EN', 'MS_FANOUT_EN'] 
         
-        CLKx_OEB
-        CLKx_PDN for power down status
+        for n in names:
+            print('{:15s}: {}'.format(n, self[n]))
+    
+    def status_PLL(self, x='A'):
+        """Return device PLL status information
+        """
+        names = ['LOL_{}', 'PLL{}_SRC', 'MSN{}_P1', 'MSN{}_P2', 'MSN{}_P3', 'FB{}_INT']        
+        for n in names:
+            n = n.format(x)
+            print('{:15s}: {}'.format(n, self[n]))
+    
+    def status_MS(self, x=0):
+        """Return device multisynth status information
+        """
+        names = ['MS{}_SRC', 'MS{}_P1', 'MS{}_P2', 'MS{}_P3', 'MS{}_INT', 'MS{}_DIVBY4', 'R{}_DIV']
         
-        PLLA_SRC
-        PLLB_SRC
+        for n in names:
+            n = n.format(x)
+            print('{:15s}: {}'.format(n, self[n]))
+    
+    def status_CLK(self, x=0):
+        """Return device clock status information
+        """
+        names = ['CLK{}_PDN', 'CLK{}_OEB', 'CLK{}_SRC',
+                 'CLK{}_PHOFF',
+                 'CLK{}_IDRV', 'CLK{}_INV',
+                 'CLK{}_DIS_STATE',
+                ]
+
+        for n in names:
+            n = n.format(x)
+            print('{:15s}: {}'.format(n, self[n]))
     
     def rational_fractions(self):
         """See these links:
@@ -38,6 +63,12 @@ class Clock(device.Device):
         https://stackoverflow.com/questions/23344185/how-to-convert-a-decimal-number-into-fraction/23344270#23344270
         
         """
+        pass
+        
+    def initialize(self):
+        """Initialize device
+        """
+        pass
         
     def configure(self):
         """Write all parameters to the clock device.  Workflow based on Figure 12 from Si5153 A/B/C datasheet.
@@ -61,7 +92,13 @@ class Clock(device.Device):
         # Enable desired output at register 3
         
         
+    def shutdown(self):
+        """shutdown device
+        """
+        pass
+
         
-        
-        
+if __name__ == '__main__':
+    pass
+
         

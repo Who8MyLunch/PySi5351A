@@ -204,15 +204,13 @@ class Device():
             # Pack to register byte, zero padded outside data range
             data_reg_byte = pack_bits(data_intermed, register['reg_MSB'], register['reg_LSB'])
 
-            if register['reg_MSB'] < 7 or register['reg_LSB'] > 0:
-                # Read and mask device's existing register value
+            if 7 > register['reg_MSB'] or register['reg_LSB'] > 0:
+                # Read device's existing register, mask out bits for current parameter
+                # TODO: A cached or shadowed register set could potentially speed up overall write performance
                 data_prior_byte = self.read_byte(register['register'])
-                data_prior_byte &= ~mask(register['reg_MSB'], register['reg_LSB']) 
+                data_prior_byte &= ~mask(register['reg_MSB'], register['reg_LSB'])  # notice the ~
 
-#                 assert((data_reg_byte &  mask(register['reg_MSB'], register['reg_LSB'])) == data_reg_byte)
-#                 assert((data_reg_byte & ~mask(register['reg_MSB'], register['reg_LSB'])) == 0)
-                
-                # Update
+                # Update register value with pre-existing values outside of current parameter bit range
                 data_reg_byte += data_prior_byte
             
             # Write byte to register address

@@ -2,7 +2,7 @@
 import smbus2
 import numpy as np
 
-from . import constants
+from . import OLD__constants as constants
 
 
 # look at this code for more ideas
