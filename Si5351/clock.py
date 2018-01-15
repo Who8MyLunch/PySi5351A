@@ -4,6 +4,7 @@ import ordered_namespace as ons
 
 from . import device
 from . import registers_Si5351
+from . import clock_defaults as defaults
 
 
             
@@ -44,15 +45,17 @@ class Clock(device.Device):
         """Return device clock status information
         """
         names = ['CLK{}_PDN', 'CLK{}_OEB', 'CLK{}_SRC',
-                 'CLK{}_PHOFF',
-                 'CLK{}_IDRV', 'CLK{}_INV',
-                 'CLK{}_DIS_STATE',
-                ]
+                 'CLK{}_PHOFF', 'CLK{}_IDRV', 'CLK{}_INV', 'CLK{}_DIS_STATE']
 
         for n in names:
             n = n.format(x)
             print('{:15s}: {}'.format(n, self[n]))
     
+    def set_SYS(self):
+        XTAL_CL = 3
+        CLKIN_DIV
+        
+        
     def rational_fractions(self):
         """See these links:
         
