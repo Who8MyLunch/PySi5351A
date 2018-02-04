@@ -1,0 +1,5 @@
+jupyter
+nose
+numpy
+ordered-namespace
+smbus2
