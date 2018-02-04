@@ -51,11 +51,6 @@ class Clock(device.Device):
             n = n.format(x)
             print('{:15s}: {}'.format(n, self[n]))
     
-    def set_SYS(self):
-        XTAL_CL = 3
-        CLKIN_DIV
-        
-        
     def rational_fractions(self):
         """See these links:
         
@@ -67,6 +62,12 @@ class Clock(device.Device):
         
         """
         pass
+        
+    @property
+    def parameter_names(self):
+        names = list(self._parameters.keys())
+        names.sort()
+        return names
         
     def initialize(self):
         """Initialize device
