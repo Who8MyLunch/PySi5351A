@@ -35,8 +35,8 @@ import pathlib
 
 import context
 
-from Si5351 import device
-from Si5351 import registers_Si5351 as registers
+from snail import device
+from snail import registers_Si5351 as registers
 
 _path_module = pathlib.Path(__file__).parent.absolute()
 
@@ -48,7 +48,7 @@ class TestDeviceParameters(unittest.TestCase):
         A = None
         P = registers.parameters
         B = None
-        
+
         self.D = device.Device(A, P, B, debug=True)
 
     def tearDown(self):
@@ -58,32 +58,32 @@ class TestDeviceParameters(unittest.TestCase):
         val = 0
         for name, values in registers.parameters.items():
             self.D.set_parameter(name, val)
-               
+
     def test_set_get_zero(self):
         val = 0
         for name, values in registers.parameters.items():
             self.D.set_parameter(name, 0)
-            tst = self.D.get_parameter(name)            
+            tst = self.D.get_parameter(name)
             self.assertTrue(tst == val, (name, tst, val))
 
     def test_set_get_one(self):
         val = 1
         for name, values in registers.parameters.items():
             self.D.set_parameter(name, val)
-            tst = self.D.get_parameter(name)            
+            tst = self.D.get_parameter(name)
             self.assertTrue(tst == val, (name, tst, val))
 
     def test_set_get_max(self):
         for name, values in registers.parameters.items():
             MSB = 0
             for r in values:
-                t = r['reg_MSB'] - r['reg_LSB'] 
+                t = r['reg_MSB'] - r['reg_LSB']
                 if t > MSB:
                     MSB = t
             val = 2**(MSB+1) - 1
 
             self.D.set_parameter(name, val)
-            tst = self.D.get_parameter(name)            
+            tst = self.D.get_parameter(name)
             self.assertTrue(tst == val, (name, tst, val))
 
 
@@ -93,7 +93,7 @@ class TestSetGetItem(unittest.TestCase):
         A = None
         P = registers.parameters
         B = None
-        
+
         self.D = device.Device(A, P, B, debug=True)
 
     def tearDown(self):
@@ -105,44 +105,44 @@ class TestSetGetItem(unittest.TestCase):
             val = 1
             self.D.set_parameter(name, val)
 
-            tst_a = self.D.get_parameter(name)            
+            tst_a = self.D.get_parameter(name)
             tst_b = self.D[name]
 
             self.assertTrue(tst_a == val, (name, tst_a, val))
             self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
-        
+
 
             val = 0
             self.D.set_parameter(name, val)
 
-            tst_a = self.D.get_parameter(name)            
+            tst_a = self.D.get_parameter(name)
             tst_b = self.D[name]
 
             self.assertTrue(tst_a == val, (name, tst_a, val))
             self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
-        
+
     def test_B(self):
         for name, values in registers.parameters.items():
 
             val = 1
             self.D[name] = val
 
-            tst_a = self.D.get_parameter(name)            
+            tst_a = self.D.get_parameter(name)
             tst_b = self.D[name]
 
             self.assertTrue(tst_a == val, (name, tst_a, val))
             self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
-        
+
 
             val = 0
             self.D[name] = val
 
-            tst_a = self.D.get_parameter(name)            
+            tst_a = self.D.get_parameter(name)
             tst_b = self.D[name]
 
             self.assertTrue(tst_a == val, (name, tst_a, val))
             self.assertTrue(tst_a == tst_b, (name, tst_a, tst_b))
-        
+
 
 
 #------------------------------------------------
