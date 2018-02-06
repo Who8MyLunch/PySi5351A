@@ -3,8 +3,8 @@ import numpy as np
 import ordered_namespace as ons
 
 from . import device
-from . import registers_Si5351
-from . import clock_defaults as defaults
+from . import registers
+from . import parameters
 
 
             
@@ -14,7 +14,7 @@ class Clock(device.Device):
     def __init__(self, bus):
         """Instantiate device with register data for Si5351 clock generator
         """
-        super().__init__(registers_Si5351.address, registers_Si5351.parameters, bus)
+        super().__init__(registers.address, registers.parameters, bus)
         
     def status_SYS(self):
         """Return device system status information
