@@ -9,7 +9,7 @@ from . import clock_defaults as defaults
 
             
 class Clock(device.Device):
-    """Device: Si5351 ABC
+    """Device: Si5351 A/B/C
     """
     def __init__(self, bus):
         """Instantiate device with register data for Si5351 clock generator
