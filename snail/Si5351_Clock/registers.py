@@ -1,5 +1,5 @@
 
-name = 'Si5351A/B/C'
+name = 'Si5351'
 address = 0x60
 
 parameters = {'SYS_INIT': [{'register': 0,
