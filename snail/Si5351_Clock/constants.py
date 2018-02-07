@@ -47,8 +47,8 @@ CLK_OEB_ENABLE =  0
 CLK_OEB_DISABLE = 1
 
 # Clock powered
-CLK_PDN_POWER = 0
-CLK_PDN_OFF =   1
+CLK_PDN_ON  = 0
+CLK_PDN_OFF = 1
 
 # Clock state when disabled
 CLK_DIS_STATE_LOW =      0b00
@@ -56,7 +56,7 @@ CLK_DIS_STATE_HIGH =     0b01
 CLK_DIS_STATE_HIGH_IMP = 0b10
 CLK_DIS_STATE_NEVER =    0b11
 
-CLK_DIS_STATE_DEF = CLK_DIS_STATE_LOW
+CLK_DIS_STATE_DEF = CLK_DIS_STATE_HIGH  # double check: HIGH or LOW???
 
 # Clock inverted (180 deg phase shift)
 CLK_INV_TRUE =  1
@@ -83,7 +83,7 @@ CLK_SRC_DEF = CLK_SRC_MS
 # Clock initial phase offset
 CLK_PHOFF_DEF = 0
 
-# Clock output dividers
+# Clock output divider values
 R_DIV_1   = 0b000
 R_DIV_2   = 0b001
 R_DIV_4   = 0b010

@@ -16,6 +16,19 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_MSB':  4,
                             'reg_LSB':  4}],
 
+         'SYS_INIT_MASK': [{'register': 2,
+                            'reg_MSB':  7,
+                            'reg_LSB':  7}],
+            'LOL_B_MASK': [{'register': 2,
+                            'reg_MSB':  6,
+                            'reg_LSB':  6}],
+            'LOL_A_MASK': [{'register': 2,
+                            'reg_MSB':  5,
+                            'reg_LSB':  5}],
+              'LOS_MASK': [{'register': 2,
+                            'reg_MSB':  4,
+                            'reg_LSB':  4}],
+
               'CLK0_OEB': [{'register': 3,
                             'reg_MSB':  0,
                             'reg_LSB':  0}],
@@ -505,7 +518,16 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'dat_MSB':  7,
                             'dat_LSB':  0}],
 
-# MultiSynth 3 - 7 are TBD
+# MultiSynth 3
+
+# MultiSynth 4
+
+# MultiSynth 5
+
+# MultiSynth 6
+
+# MultiSynth 7
+
 
 
 # Spread Spectrum, just enough control so I can disable it

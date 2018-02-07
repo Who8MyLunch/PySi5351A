@@ -1,10 +1,9 @@
 
 import numpy as np
-import ordered_namespace as ons
 
-from . import device
-from . import registers
-from . import parameters
+from .. import device
+from .  import registers
+from .  import constants
 
 
             
@@ -25,7 +24,8 @@ class Clock(device.Device):
             print('{:15s}: {}'.format(n, self[n]))
     
     def status_PLL(self, x='A'):
-        """Return device PLL status information
+        """Return device PLL status information.
+        x = 'A' or 'B'
         """
         names = ['LOL_{}', 'PLL{}_SRC', 'MSN{}_P1', 'MSN{}_P2', 'MSN{}_P3', 'FB{}_INT']        
         for n in names:
@@ -34,6 +34,7 @@ class Clock(device.Device):
     
     def status_MS(self, x=0):
         """Return device multisynth status information
+        x = 0, or 1, ... or ... 7
         """
         names = ['MS{}_SRC', 'MS{}_P1', 'MS{}_P2', 'MS{}_P3', 'MS{}_INT', 'MS{}_DIVBY4', 'R{}_DIV']
         
@@ -43,6 +44,7 @@ class Clock(device.Device):
     
     def status_CLK(self, x=0):
         """Return device clock status information
+        x = 0, or 1, ... or ... 7
         """
         names = ['CLK{}_PDN', 'CLK{}_OEB', 'CLK{}_SRC',
                  'CLK{}_PHOFF', 'CLK{}_IDRV', 'CLK{}_INV', 'CLK{}_DIS_STATE']
@@ -70,7 +72,7 @@ class Clock(device.Device):
         return names
         
     def initialize(self):
-        """Initialize device
+        """Initialize device to default values
         """
         pass
         
