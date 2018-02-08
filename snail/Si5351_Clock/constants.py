@@ -1,7 +1,3 @@
-# Permissible crystal frequencies
-XTAL_25MHZ = 25000000
-XTAL_27MHZ = 27000000
-
 # PLL index number
 PLL_A = 0
 PLL_B = 1

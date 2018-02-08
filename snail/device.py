@@ -222,6 +222,12 @@ class Device():
     def __getitem__(self, name):
         return self.get_parameter(name)
         
+#     def __setattr__(self, name, value):
+#         self.set_parameter(name, value)
+        
+#     def __getattr__(self, name):
+#         return self.get_parameter(name)
+        
 #---------------------------------------------------
 if __name__ == '__main__':
     pass

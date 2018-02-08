@@ -256,54 +256,7 @@ class Si5351(object):
         val = 0x00 if enabled else 0xFF
         self.write_byte(constants.REGISTER_3_OUTPUT_ENABLE_CONTROL, val)
 
-#------------------------------------------------
 
-# def fraction_solve(x0):
-#     """Return numerator and denominator for best expression for the decimal x0 (0<x0<1)
-#     """
-#     if(x0 < 0 or x0 > 1):
-#         raise Exception("Decimal supplied (x) must satisfy 0 < x < 1")
-
-#     err = 1e-10
-
-#     g = abs(x0)
-
-#     a = 0.0
-#     b = 1.0
-#     c = 1.0
-#     d = 0.0
-#     s = 0.0
-
-#     count = 0
-
-#     while count < 1000:
-#         s = np.floor(g)
-#         num = a + s*c
-#         den = b + s*d
-
-#         a = c
-#         b = d
-#         c = num
-#         d = den
-
-#         try:
-#             g = 1/(g - s)
-
-#         except ZeroDivisionError:
-#             # g=s at very very close solutions so will terminate next time
-#             g = g
-
-#         if (abs((num/den) - x0) < err):
-#             if (b > 1048575 or c > 1048575):
-#                 raise Exception("Produced values for fraction out of specified range")
-
-#             return (num, den)
-
-#         count += 1
-
-#     #Have tried a thousand times, give up (most values this was run on returned within 20 iterations
-#     raise Exception("Could not find adequate results to express {:f} as a fraction".format(x0))
-# #------------------------------------------------
 
 if __name__ == '__main__':
     si = Si5351()
