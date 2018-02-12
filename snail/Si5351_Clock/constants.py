@@ -35,8 +35,6 @@ MS_SRC_PLL_DEF = MS_SRC_PLL_A
 MS_DIVBY4_ENABLE =  0b11
 MS_DIVBY4_DISABLE = 0b00
 
-MS_DIVBY4_DEF = MS_DIVBY4_DISABLE
-
 ##########################################
 # Clock output enable/disable
 CLK_OEB_ENABLE =  0
@@ -52,13 +50,9 @@ CLK_DIS_STATE_HIGH =     0b01
 CLK_DIS_STATE_HIGH_IMP = 0b10
 CLK_DIS_STATE_NEVER =    0b11
 
-CLK_DIS_STATE_DEF = CLK_DIS_STATE_HIGH  # double check: HIGH or LOW???
-
 # Clock inverted (180 deg phase shift)
 CLK_INV_TRUE =  1
 CLK_INV_FALSE = 0
-
-CLK_INV_DEF = CLK_INV_FALSE
 
 # Clock drive current (mA)
 CLK_IDRV_2 = 0b00
@@ -71,13 +65,13 @@ CLK_IDRV_DEF = CLK_IDRV_8  # what's the best choice???
 # Clock source
 CLK_SRC_XTAL =  0b00
 CLK_SRC_CLKIN = 0b01
-# reserved      0b10
+CLK_SRC_MS04 =  0b10
 CLK_SRC_MS =    0b11
 
 CLK_SRC_DEF = CLK_SRC_MS
 
 # Clock initial phase offset
-CLK_PHOFF_DEF = 0
+CLK_PHOFF_ZERO = 0
 
 # Clock output divider values
 R_DIV_1   = 0b000
@@ -88,8 +82,6 @@ R_DIV_16  = 0b100
 R_DIV_32  = 0b101
 R_DIV_64  = 0b110
 R_DIV_128 = 0b111
-
-R_DIV_DEF = R_DIV_1
 
 #-----------------------------------------
 if __name__ == '__main__':
