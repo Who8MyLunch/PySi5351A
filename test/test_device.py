@@ -36,7 +36,7 @@ import pathlib
 import context
 
 from snail import device
-from snail import registers_Si5351 as registers
+from snail.Si5351_Clock import registers
 
 _path_module = pathlib.Path(__file__).parent.absolute()
 
