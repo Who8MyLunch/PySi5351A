@@ -15,8 +15,6 @@ CLKIN_DIV_2 = 0b01
 CLKIN_DIV_4 = 0b10
 CLKIN_DIV_8 = 0b11
 
-CLKIN_DIV_DEF = CLKIN_DIV_1
-
 ##########################################
 # PLL source select
 PLL_SRC_XTAL = 0
@@ -60,15 +58,11 @@ CLK_IDRV_4 = 0b01
 CLK_IDRV_6 = 0b10
 CLK_IDRV_8 = 0b11
 
-CLK_IDRV_DEF = CLK_IDRV_8  # what's the best choice???
-
 # Clock source
 CLK_SRC_XTAL =  0b00
 CLK_SRC_CLKIN = 0b01
 CLK_SRC_MS04 =  0b10
 CLK_SRC_MS =    0b11
-
-CLK_SRC_DEF = CLK_SRC_MS
 
 # Clock initial phase offset
 CLK_PHOFF_ZERO = 0
