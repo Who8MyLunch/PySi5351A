@@ -77,6 +77,10 @@ R_DIV_32  = 0b101
 R_DIV_64  = 0b110
 R_DIV_128 = 0b111
 
+# Fanout enable/disable for CLKIN_FANOUT_EN, XO_FANOUT_EN, and MS_FANOUT_EN
+FANOUT_ENABLE =  0b1
+FANOUT_DISABLE = 0b0
+
 #-----------------------------------------
 if __name__ == '__main__':
     pass
