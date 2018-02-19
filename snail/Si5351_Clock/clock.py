@@ -103,7 +103,42 @@ class Clock(device.Device):
         """
         pass
 
+    
+    
+class Multiplier():
+    """Manage multipler (and divider) calculations and configuration.
+    Compute values for register parameters P1, P2, and P3.
+    """
+    def __init__(self):
+        self._P1 = None
+        self._P2 = None
+        self._P3 = None
         
+    @property
+    def P1(self):
+        return self._P1
+    
+    @property
+    def P2(self):
+        return self._P2
+    
+    @property
+    def P3(self):
+        return self._P3
+    
+    @property
+    def is_integer(self):
+        """Return True if multiplier value is an even integer
+        """
+    
+    
+        
+        
+    
+    
+    
+    
+    
 if __name__ == '__main__':
     pass
 
