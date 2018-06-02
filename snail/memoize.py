@@ -20,7 +20,7 @@ class Memoize():
     def __init__(self, func):
         self._cache = {}
         self._func = func
- 
+
     def __call__(self, *args, **kwargs):
         key = flexi_hash(args) + flexi_hash(kwargs)
 

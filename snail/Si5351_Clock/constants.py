@@ -48,10 +48,6 @@ CLK_DIS_STATE_HIGH =     0b01
 CLK_DIS_STATE_HIGH_IMP = 0b10
 CLK_DIS_STATE_NEVER =    0b11
 
-# Clock inverted (180 deg phase shift)
-CLK_INV_TRUE =  1
-CLK_INV_FALSE = 0
-
 # Clock drive current (mA)
 CLK_IDRV_2 = 0b00
 CLK_IDRV_4 = 0b01
@@ -66,6 +62,10 @@ CLK_SRC_MS =    0b11
 
 # Clock initial phase offset
 CLK_PHOFF_ZERO = 0
+
+# Clock inverted (180 deg phase shift)
+CLK_INV_TRUE =  1
+CLK_INV_FALSE = 0
 
 # Clock output divider values
 R_DIV_1   = 0b000

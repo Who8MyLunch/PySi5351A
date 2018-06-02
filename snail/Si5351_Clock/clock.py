@@ -10,15 +10,37 @@ from .  import constants
 class Clock(device.Device):
     """Device: Si5351 A/B/C
     """
-    def __init__(self, bus):
+    def __init__(self, bus=1):
         """Instantiate device with register data for Si5351 clock generator
         """
         super().__init__(registers.address, registers.parameters, bus)
         
+    def status(self):
+        """Print all status information
+        """
+        print()
+        self.status_SYS()
+
+        for PLL in ['A', 'B']:
+            print()
+            self.status_PLL(PLL)
+
+        print()
+        for MS in range(3):
+            print()
+            self.status_MS(MS)
+        
+        print()
+        for CLK in range(3):
+            print()
+            self.status_CLK(CLK)
+
+
     def status_SYS(self):
         """Return device system status information
         """
-        names = ['SYS_INIT', 'CLKIN_DIV', 'XTAL_CL', 'SSC_EN', 'CLKIN_FANOUT_EN', 'XO_FANOUT_EN', 'MS_FANOUT_EN'] 
+        names = ['SYS_INIT', 'CLKIN_DIV', 'XTAL_CL', 'SSC_EN',
+                 'CLKIN_FANOUT_EN', 'XO_FANOUT_EN', 'MS_FANOUT_EN'] 
         
         for n in names:
             print('{:15s}: {}'.format(n, self[n]))
@@ -36,7 +58,13 @@ class Clock(device.Device):
         """Return device multisynth status information
         x = 0, or 1, ... or ... 7
         """
-        names = ['MS{}_SRC', 'MS{}_P1', 'MS{}_P2', 'MS{}_P3', 'MS{}_INT', 'MS{}_DIVBY4', 'R{}_DIV']
+        if 0 <= x and x <= 5:
+            names = ['MS{}_SRC', 'MS{}_P1', 'MS{}_P2', 'MS{}_P3',
+                     'MS{}_INT', 'MS{}_DIVBY4', 'R{}_DIV']
+        elif 6 <= x and x <= 7:
+            names = ['MS{}_SRC', 'MS{}_P1', 'R{}_DIV']
+        else:
+            raise ValueError('Invalid x: {}'.format(x))
         
         for n in names:
             n = n.format(x)
@@ -46,9 +74,17 @@ class Clock(device.Device):
         """Return device clock status information
         x = 0, or 1, ... or ... 7
         """
-        names = ['CLK{}_PDN', 'CLK{}_OEB', 'CLK{}_SRC',
-                 'CLK{}_PHOFF', 'CLK{}_IDRV', 'CLK{}_INV', 'CLK{}_DIS_STATE']
+        if 0 <= x and x <= 5:
+            names = ['CLK{}_PDN', 'CLK{}_OEB', 'CLK{}_SRC',
+                     'CLK{}_PHOFF', 'CLK{}_IDRV', 'CLK{}_INV', 'CLK{}_DIS_STATE']
+        elif 6 <= x and x <= 7:
+            names = ['CLK{}_PDN', 'CLK{}_OEB', 'CLK{}_SRC',
+                     'CLK{}_IDRV', 'CLK{}_INV', 'CLK{}_DIS_STATE']
+        else:
+            raise ValueError('Invalid x: {}'.format(x))
+        
 
+        
         for n in names:
             n = n.format(x)
             print('{:15s}: {}'.format(n, self[n]))
@@ -134,12 +170,22 @@ class Multiplier():
     
         
         
+class PLL():
+    """Helper class
+    """
+    def __init__(self, si5351):
+        self._si5351 = si5351
+
+
+
+class CLK():
+    """Helper class
+    """
+    def __init__(self, si5351, PLL):
+        self._si5351 = si5351
+        self._PLL = PLL
     
-    
-    
-    
-    
+
+#------------------------------------------
 if __name__ == '__main__':
     pass
-
-        
