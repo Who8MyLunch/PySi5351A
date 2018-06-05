@@ -41,7 +41,7 @@ def eval_chain(fractions):
         
 def rational_approximation(value, max_num=None, max_den=None,
                            lohi_num=[0, np.inf], lohi_den=[1, np.inf],
-                           max_iter=1e4):
+                           max_iter=1e6):
     """Compute best rational approximation of a fraction via continued fraction series
     """
     eps = 1.e-20
