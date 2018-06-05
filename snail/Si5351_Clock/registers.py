@@ -524,7 +524,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  4,
                             'dat_MSB':  2,
                             'dat_LSB':  0}],
-              
+
             'MS3_DIVBY4': [{'register':68,
                             'reg_MSB':  3,
                             'reg_LSB':  2,
@@ -590,7 +590,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  2,
                             'dat_MSB':  1,
                             'dat_LSB':  0}],
-              
+
                 'MS4_P1': [{'register':76,
                             'reg_MSB':  1,
                             'reg_LSB':  0,
@@ -636,7 +636,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  0,
                             'dat_MSB':  7,
                             'dat_LSB':  0}],
-              
+
 # MultiSynth 5
                 'R5_DIV': [{'register':84,
                             'reg_MSB':  6,
@@ -649,7 +649,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  2,
                             'dat_MSB':  1,
                             'dat_LSB':  0}],
-              
+
                 'MS5_P1': [{'register':84,
                             'reg_MSB':  1,
                             'reg_LSB':  0,
@@ -695,7 +695,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  0,
                             'dat_MSB':  7,
                             'dat_LSB':  0}],
-              
+
 # MultiSynth 6
                 'R6_DIV': [{'register':92,
                             'reg_MSB':  2,
@@ -708,7 +708,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  0,
                             'dat_MSB':  7,
                             'dat_LSB':  0}],
-                            
+
 # MultiSynth 7
                 'R7_DIV': [{'register':92,
                             'reg_MSB':  6,
@@ -721,7 +721,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':  0,
                             'dat_MSB':  7,
                             'dat_LSB':  0}],
-                            
+
 
 
 # Spread Spectrum, just enough control so I can disable it
@@ -754,7 +754,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_LSB':   0}],
 
 
-# Miscelaneous
+# PLL soft reset
               'PLLA_RST': [{'register':177,
                             'reg_MSB':   5,
                             'reg_LSB':   5}],
@@ -762,6 +762,7 @@ parameters = {'SYS_INIT': [{'register': 0,
                             'reg_MSB':   7,
                             'reg_LSB':   7}],
 
+# Miscelaneous
                'XTAL_CL': [{'register':183,
                             'reg_MSB':   7,
                             'reg_LSB':   6}],
